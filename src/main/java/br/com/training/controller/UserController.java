@@ -8,25 +8,27 @@ import org.springframework.http.HttpStatus;
 
 import br.com.training.model.User;
 import br.com.training.repository.UserRepository;
+import br.com.training.service.UserService;
 
 @RestController
 @RestControllerAdvice
 @RequestMapping("/users")
 public class UserController {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public User createUser(@RequestBody @Valid User user) {
-		return userRepository.save(user);
-	}
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public User createUser(@RequestBody @Valid User user) {
+        return userService.saveUser(user);
+    }
 
-	@GetMapping (value = "/{cpf}")
-	@ResponseStatus(HttpStatus.OK)
+
+    @GetMapping (value = "/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
     public User getUser (@PathVariable String cpf){
-        return userRepository.findByCpf(cpf);
+        return userService.findUserByCpf(cpf);
     }
 
 }
