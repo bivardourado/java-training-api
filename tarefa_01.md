@@ -17,8 +17,7 @@ Na primeira parte desse desafio, o objetivo vai ser de atualizar a estrutura do 
 #### Tarefa 🔛
 
 - Crie uma camada de `Service` para ser usada entre a camada de `Controller` e de `Repository`.
-  - Atual: *Controller --> Repository*
-  - Esperado: *Controller --> Service --> Repository*
+ 
 
 ### Crei um pacote Service.
 ### Crei uma classe Userservice.
@@ -31,11 +30,6 @@ Na primeira parte desse desafio, o objetivo vai ser de atualizar a estrutura do 
 
 ### CRUD completo
 
-#### Tarefa 🚀
-
-- Complete o CRUD com os endpoints de `UPDATE` e `DELETE` usando o CPF como *PathVariable*.
-  - Atual: *POST + GET*
-  - Esperado: *POST + GET + PUT + DELETE*
 
 Criei dois novos endpoints:
 
