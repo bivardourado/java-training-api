@@ -20,9 +20,11 @@ Na primeira parte desse desafio, o objetivo vai ser de atualizar a estrutura do 
   - Atual: *Controller --> Repository*
   - Esperado: *Controller --> Service --> Repository*
 
-*Usar uma camada de `Service` é uma boa prática para separar as responsabilidades no projeto, pois as regras de negocio serão implementada nesta camada no lugar de ficar na camada de Controller (que tem como responsabilidade de ser a camada de entrada e saida de dados).*
-
-[Referência a respeito de separação de conceitos](https://www.profissionaisti.com.br/entendendo-a-separacao-de-conceitos-separation-of-concerns-soc/#:~:text=Na%20Programa%C3%A7%C3%A3o%20Orientada%20a%20Objetos,subclasses)
+### Crei um pacote Service.
+### Crei uma classe Userservice.
+### Criei uma instância da classe UserService no UserController, injetando-a com a anotação @Autowired.
+### Alterei o método createUser() do UserController para chamar o método saveUser() da classe UserService.
+### Alterei o método getUser() do UserController para chamar o método findUserByCpf() da classe UserService.
 
 .
 
@@ -35,6 +37,10 @@ Na primeira parte desse desafio, o objetivo vai ser de atualizar a estrutura do 
   - Atual: *POST + GET*
   - Esperado: *POST + GET + PUT + DELETE*
 
+Criei dois novos endpoints:
 
+@PutMapping (value = "/{cpf}") para realizar a operação de update.
+@DeleteMapping (value = "/{cpf}") para realizar a operação de delete.
+Ambos recebem o CPF como parâmetro na URL e utilizam o UserService para executar as operações necessárias.
 
 * * *
