@@ -2,15 +2,11 @@
 
 ## 1️⃣ Primeira parte
 
-Na primeira parte desse desafio, o objetivo vai ser de atualizar a estrutura do projeto, e completar o CRUD (Create, Read, Update e Delete) do Controller.
-
 ### Versionando seu código
 
-#### Tarefa 🔀
+### Feito
 
-- O versionamento do nosso código é algo muito importante, para cada tarefa que está sendo solicitada for concluída, faça um commit para o seu repositório.
 
-[Referência a respeito do GIT](https://rogerdudler.github.io/git-guide/index.pt_BR.html)
 
 ### Camada de Service
 
@@ -28,13 +24,16 @@ Na primeira parte desse desafio, o objetivo vai ser de atualizar a estrutura do 
 .
 
 
-### CRUD completo
 
+### CRUD completo
 
 Criei dois novos endpoints:
 
 @PutMapping (value = "/{cpf}") para realizar a operação de update.
 @DeleteMapping (value = "/{cpf}") para realizar a operação de delete.
 Ambos recebem o CPF como parâmetro na URL e utilizam o UserService para executar as operações necessárias.
+
+
+
 
 * * *
