@@ -24,11 +24,22 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-
     @GetMapping (value = "/{cpf}")
     @ResponseStatus(HttpStatus.OK)
     public User getUser (@PathVariable String cpf){
         return userService.findUserByCpf(cpf);
+        
     }
 
+    @PutMapping (value = "/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
+    public User updateUser(@PathVariable String cpf, @RequestBody @Valid User user) {
+        return userService.updateUserByCpf(cpf, user);
+    }
+
+    @DeleteMapping (value = "/{cpf}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable String cpf) {
+        userService.deleteUserByCpf(cpf);
+    }
 }
