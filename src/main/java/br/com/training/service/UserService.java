@@ -22,13 +22,12 @@ public class UserService {
         return userRepository.findByCpf(cpf);
     }
 
-	public User updateUserByCpf(String cpf, @Valid User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public User updateUserByCpf(String cpf, User user) {
+            return userRepository.findByCpf(cpf);
+    }
 
-	public void deleteUserByCpf(String cpf) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void deleteUserByCpf(String cpf) {
+       userRepository.deleteByCpf(cpf);
+    }
+
 }
