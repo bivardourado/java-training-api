@@ -18,9 +18,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findUserByCpf(String cpf) {
-        return userRepository.findByCpf(cpf);
-    }
+    
 
     public User updateUserByCpf(String cpf, @Valid User user) {
         User existingUser = userRepository.findByCpf(cpf);
