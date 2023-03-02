@@ -113,4 +113,14 @@ public class User implements Serializable {
 		return true;
 	}
 
+	public Object getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setPassword(Object password) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

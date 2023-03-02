@@ -22,12 +22,25 @@ public class UserService {
         return userRepository.findByCpf(cpf);
     }
 
-    public User updateUserByCpf(String cpf, User user) {
-            return userRepository.findByCpf(cpf);
+    public User updateUserByCpf(String cpf, @Valid User user) {
+        User existingUser = userRepository.findByCpf(cpf);
+        if (existingUser == null) {
+        
+            return null;
+        }
+        existingUser.setName(user.getName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setBirthDate(user.getBirthDate());
+       
+        return userRepository.save(existingUser);
     }
 
     public void deleteUserByCpf(String cpf) {
-       userRepository.deleteByCpf(cpf);
+        User existingUser = userRepository.findByCpf(cpf);
+        if (existingUser == null) {
+      
+            return;
+        }
+        userRepository.delete(existingUser);
     }
-
 }
