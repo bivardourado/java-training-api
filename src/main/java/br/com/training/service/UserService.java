@@ -1,6 +1,6 @@
 package br.com.training.service;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class UserService {
     }
     
 
-    public User updateUserByCpf(String cpf, @Valid User user) {
+    public User updateUserByCpf(String cpf,  User user) {
         User existingUser = userRepository.findByCpf(cpf);
         if (existingUser == null) {
         
@@ -39,8 +39,8 @@ public class UserService {
         User existingUser = userRepository.findByCpf(cpf);
         if (existingUser == null) {
       
-            return;
+        	userRepository.delete(existingUser);
         }
-        userRepository.delete(existingUser);
+        
     }
 }
