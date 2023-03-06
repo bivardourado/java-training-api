@@ -1,13 +1,14 @@
 package br.com.training.controller.dto;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDate;
 
 public class UserForm {
 
@@ -23,7 +24,7 @@ public class UserForm {
 
     @NotNull
     @Past
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate birthDate;
 
     public String getName() {
@@ -54,7 +55,9 @@ public class UserForm {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(String birthDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(birthDate, formatter);
+        this.birthDate = date;
     }
 }

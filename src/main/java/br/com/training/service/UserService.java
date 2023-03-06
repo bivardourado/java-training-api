@@ -1,8 +1,5 @@
 package br.com.training.service;
 
-
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,46 +14,58 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public UserResponse saveUser(UserForm userForm) {
-        User user = convertToEntity(userForm);
+    public UserResponse createUser(UserForm userForm) {
+        User user = toUser(userForm);
         User savedUser = userRepository.save(user);
-        return convertToDto(savedUser);
+        UserResponse userResponse = toUserResponse(savedUser);
+        return userResponse;
     }
 
-    private User convertToEntity(UserForm userForm) {
-        return modelMapper.map(userForm, User.class);
-    }
-
-    private UserResponse convertToDto(User user) {
-        return modelMapper.map(user, UserResponse.class);
-    }
-
-    public UserResponse findUserByCpf(String cpf) {
-        User user = userRepository.findByCpf(cpf);
-        return convertToDto(user);
-    }
-
-    public UserResponse updateUserByCpf(String cpf, UserForm userForm) {
-        User existingUser = userRepository.findByCpf(cpf);
-        if (existingUser == null) {
+    public UserResponse getUserById(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
             return null;
         }
-        User user = convertToEntity(userForm);
-        existingUser.setName(user.getName());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setBirthDate(user.getBirthDate());
-        User updatedUser = userRepository.save(existingUser);
-        return convertToDto(updatedUser);
+        return toUserResponse(user);
     }
 
-    public void deleteUserByCpf(String cpf) {
-        User existingUser = userRepository.findByCpf(cpf);
-        if (existingUser == null) {
-            userRepository.delete(existingUser);
+    public UserResponse updateUser(Long id, UserForm userForm) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return null;
         }
-    
+        updateUserFromDTO(user, userForm);
+        User updatedUser = userRepository.save(user);
+        UserResponse userResponse = toUserResponse(updatedUser);
+        return userResponse;
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    private User toUser(UserForm userForm) {
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setCpf(userForm.getCpf());
+        user.setBirthDate(userForm.getBirthDate());
+        return user;
+    }
+
+    private void updateUserFromDTO(User user, UserForm userForm) {
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+    }
+
+    private UserResponse toUserResponse(User user) {
+        UserResponse userResponse = new UserResponse();
+        
+        userResponse.setName(user.getName());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setCpf(user.getCpf());
+        userResponse.setBirthDate(user.getBirthDate());
+        return userResponse;
     }
 }
+

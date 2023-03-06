@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import br.com.training.model.User;
-
+import br.com.training.controller.dto.UserForm;
+import br.com.training.controller.dto.UserResponse;
 import br.com.training.service.UserService;
 
 @RestController
@@ -20,26 +20,25 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody @Valid User user) {
-        return userService.saveUser(user);
+    public UserResponse createUser(@RequestBody @Valid UserForm userForm) {
+        return userService.createUser(userForm);
     }
 
-    @GetMapping (value = "/{cpf}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User getUser (@PathVariable String cpf){
-        return userService.findUserByCpf(cpf);
-        
+    public UserResponse getUser(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
-    @PutMapping (value = "/{cpf}")
+    @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User updateUser(@PathVariable String cpf, @RequestBody @Valid User user) {
-        return userService.updateUserByCpf(cpf, user);
+    public UserResponse updateUser(@PathVariable Long id, @RequestBody @Valid UserForm userForm) {
+        return userService.updateUser(id, userForm);
     }
 
-    @DeleteMapping (value = "/{cpf}")
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable String cpf) {
-        userService.deleteUserByCpf(cpf);
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }
