@@ -41,8 +41,12 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            userRepository.deleteById(id);
+        }
     }
+
 
     private User toUser(UserForm userForm) {
         User user = new User();
