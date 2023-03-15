@@ -91,7 +91,7 @@ public class UserServiceTest {
 
         userService.deleteUserByCpf("12345678900 ");
 
-        User deletedUser = userService.findUserByCpf(" ");
+        User deletedUser = userService.findUserByCpf("12345678900 ");
         assertNull(deletedUser);
         
         
